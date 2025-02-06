@@ -39,14 +39,15 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 INSTALLED_APPS = [
+    "allauth",
+    "allauth.account",
+    "chirper",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    "allauth",
-    "allauth.account"
 ]
 
 MIDDLEWARE = [
