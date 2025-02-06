@@ -16,10 +16,14 @@ version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
     { name = "django" },
+    { name = "django-allauth" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "django", specifier = ">=5.1.6" }]
+requires-dist = [
+    { name = "django", specifier = ">=5.1.6" },
+    { name = "django-allauth", specifier = ">=65.4.0" },
+]
 
 [[package]]
 name = "django"
@@ -34,6 +38,16 @@ sdist = { url = "https://files.pythonhosted.org/packages/6d/e4/901f54ee114a08037
 wheels = [
     { url = "https://files.pythonhosted.org/packages/75/6f/d2c216d00975e2604b10940937b0ba6b2c2d9b3cc0cc633e414ae3f14b2e/Django-5.1.6-py3-none-any.whl", hash = "sha256:8d203400bc2952fbfb287c2bbda630297d654920c72a73cc82a9ad7926feaad5", size = 8277066 },
 ]
+
+[[package]]
+name = "django-allauth"
+version = "65.4.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "asgiref" },
+    { name = "django" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/b4/f0/8aca7cc8c63b432565472e231ace2edfe3966304884f0ab106362e586ff8/django_allauth-65.4.0.tar.gz", hash = "sha256:1b6eb5d4a781a9a18dcd5ccf2bcae7ae542a56baea8e7b8f33a54c743cb54b0a", size = 1559056 }
 
 [[package]]
 name = "sqlparse"
