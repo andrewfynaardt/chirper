@@ -12,8 +12,8 @@ from .views import chirp_view
 from django.views.generic import TemplateView
 
 urlpatterns = [
-    path('views/', chirp_view, name='chirp'),
-
+    # The template for chirp_form
+    path('chirp_form/', chirp_view, name='chirp_form'),
     # The success page after user uploaded their chirp
-    path('success/', TemplateView.as_view(template_name="success.html"), name='success'),
+    path('success/', TemplateView.as_view(template_name="chirper/success.html"), name='success'),
 ]

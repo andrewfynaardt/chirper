@@ -30,10 +30,10 @@ class Chirps(models.Model):
     """
     chirp_body = models.CharField(max_length=255)
     user_id = models.ForeignKey(
-    Users,
-    on_delete=models.SET_NULL,
-    null=True
-    ) 
+        Users,
+        on_delete=models.SET_NULL,
+        null=True
+        ) 
     created_time = models.DateTimeField()
     parent_chirp_id = models.ForeignKey(
         'self', # Another chirp's ID
