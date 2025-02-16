@@ -2,6 +2,22 @@ from django.db import models
 
 # Create your models here.
 
+
+class Users(models.Model):
+    """
+    Information related to each user is stored here.
+    
+    Attributes:
+        user_name (str): The name of the user.
+        email (str): The email address of the user.
+    """
+
+    user_name = models.CharField(max_length=150)
+    email = models.CharField(max_length=150)
+
+    def __str__(self):
+        return self.user_name
+
 class Chirps(models.Model):
     """
     Information related to each chirp are stored here.
@@ -20,7 +36,7 @@ class Chirps(models.Model):
     ) 
     created_time = models.DateTimeField()
     parent_chirp_id = models.ForeignKey(
-        Chirps,
+        'self', # Another chirp's ID
         on_delete=models.SET_NULL,
         null=True
         ) 
@@ -28,17 +44,3 @@ class Chirps(models.Model):
     def __str__(self):
         return self.chirp_body[:20]
     
-class Users(models.Model):
-    """
-    Information related to each user is stored here.
-    
-    Attributes:
-        user_name (str): The name of the user.
-        email (str): The email address of the user.
-    """
-
-    user_name = models.CharField(max_length=150)
-    email = models.models.CharField(max_length=150)
-
-    def __str__(self):
-        return self.user_name
