@@ -18,6 +18,7 @@ class Users(models.Model):
     def __str__(self):
         return self.user_name
 
+
 class Chirps(models.Model):
     """
     Information related to each chirp are stored here.
