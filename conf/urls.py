@@ -17,10 +17,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-
+, include
+from chirper import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('accounts/profile/', views.profile, name = 'profile'),
+    path('accounts/', include('allauth.urls')),
+    path('', views.profile, name = 'profile'),
     
     # Include the chirper app urls
     path('chirper/', include('chirper.urls')),
