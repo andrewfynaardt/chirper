@@ -10,5 +10,6 @@ from .models import Chirps, Users
 
 # Register your models here.
 
+
 admin.site.register(Chirps)
 admin.site.register(Users)
