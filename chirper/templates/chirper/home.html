@@ -17,55 +17,153 @@ the home page has the the following section:
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Chirper Home</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <style>
-        
+    <style>        
         /* For the user to create new post */
         .bottom-section {
           position: fixed;
           bottom: 0;
         }
 
+        /* To make it fill the whole width of screen*/
+        .top-bar-container {
+          padding: 0;
+        }
+
+      
       </style>
 
   </head>
   <body>
     
-    <div class="container-fluid text-center">
-        <!-- top bar: web app name and login button-->
-        <div class="d-flex flex-row justify-content-between p-2 align-items-center justify-content-center bg-primary-subtle text-primary-emphasis">
+    <div class="container-fluid text-center top-bar-container">
+      <!-- top bar: web app name and login button-->
+      <div class="d-flex flex-row justify-content-between p-2 align-items-center justify-content-center bg-primary-subtle text-primary-emphasis">
 
-          <!-- for app name and button display (used flexbox)-->
-          <div><button type="button" class="btn btn-primary-subtle">login</button></div>
+        <!-- invisible button top bar layout (used flexbox)-->
+        <div class="opacity-0"><button type="button" class="btn btn-primary">login</button></div>
 
-          <!-- web app name -->
-          <div>
-            <h3>Chirper 🐦‍🔥</h3>
+        <!-- web app name -->
+        <div>
+          <h3>Chirper 🐦‍🔥</h3>
+        </div>
+
+        <!-- login button-->
+        <div>
+          <button type="button" class="btn btn-warning">login</button>
+        </div>
+
+      </div>
+      <!-- end of top bar-->
+    </div>
+
+
+
+    <!-- Display chirps -->
+    <div class="container p-2 bg-primary text-white">
+      
+      <!-- A card to display chirp-->
+      <div class="card mt-2 text-start">
+        
+        <div class="card-header d-flex flex-row justify-content-between">
+          <div class="col text-start">
+            User_ID and User_name
           </div>
-
-          <!-- login button-->
-          <div>
-            <button type="button" class="btn btn-warning">login</button>
+          <div class="col text-end">
+            Created at 2025-02-25
           </div>
 
         </div>
-        <!-- end of top bar-->
+        
+        <div class="card-body">
+           <p class="card-text">The content of the chirp goes here - example: With supporting text 
+            below as a natural lead-in to additional content.
+            example: With supporting text below as a natural lead-in to additional content.
+            example--:--(255char)
+           </p> 
+        </div>
+
+        <!-- Card footer: like button, wrtie reply button, number of replies of the chirp-->
+        <div class="d-flex flex-row card-footer align-items-center justify-content-between">
+          <div class="col text-start">
+            <a href="#" class="btn like-btn-toggle btn-outline-primary">Like</a>
+          </div>
+          <div class="col text-center">
+            <a href="#" class="btn btn-primary">write a reply</a>
+          </div>
+          <div class="col text-end text-body-secondary">
+            35 replies
+          </div>
+        </div>
       </div>
+      <!-- end of chirp card-->
 
+      <!-- A card to display chirp-->
+      <div class="card mt-2 text-start">
+        
+        <div class="card-header d-flex flex-row justify-content-between">
+          <div class="col text-start">
+            User_ID and User_name
+          </div>
+          <div class="col text-end">
+            Created at 2025-02-25
+          </div>
 
+        </div>
+        
+        <div class="card-body">
+           <p class="card-text">The content of the chirp goes here - example: With supporting text 
+            below as a natural lead-in to additional content.
+            example: With supporting text below as a natural lead-in to additional content.
+            example--:--(255char)
+           </p> 
+        </div>
 
-      <!-- Display chirps -->
-      <div class="container bg-primary text-white">
-        <h5> chirps go here </h5>
+        <!-- Card footer: like button, wrtie reply button, number of replies of the chirp-->
+        <div class="d-flex flex-row card-footer align-items-center justify-content-between">
+          <div class="col text-start">
+            <a href="#" class="btn like-btn-toggle btn-outline-primary">Like</a>
+          </div>
+          <div class="col text-center">
+            <a href="#" class="btn btn-primary">write a reply</a>
+          </div>
+          <div class="col text-end text-body-secondary">
+            35 replies
+          </div>
+        </div>
       </div>
+      <!-- end of chirp card-->
+
+      
+    </div>
 
 
-      <!-- User create a new chirp here -->
-      <div class="bottom-section container-fluid text-center bg-black text-white">
-        <h5> Create new Chirp</h5>
-      </div>
-      <!-- End of User creating new chirp section-->
+    <!-- User create a new chirp here -->
+    <div class="bottom-section container-fluid text-center bg-black text-white">
+      <h5> Create new Chirp</h5>
+    </div>
+    <!-- End of User creating new chirp section-->
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
+
+    <script>
+      /* For the like button toggle */
+      document.addEventListener('DOMContentLoaded', (event) => {
+          document.querySelectorAll('.like-btn-toggle').forEach(button => {
+              button.addEventListener('click', function() {
+                  if (this.classList.contains('btn-outline-primary')) {
+                      this.classList.remove('btn-outline-primary');
+                      this.classList.add('btn-primary');
+                      this.innerHTML = 'Liked';
+                  } else {
+                      this.classList.remove('btn-primary');
+                      this.classList.add('btn-outline-primary');
+                      this.innerHTML = 'Like';
+                  }
+              });
+          });
+      });
+    </script>
   </body>
 </html> 
