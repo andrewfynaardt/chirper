@@ -3,7 +3,7 @@ from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .forms import ChirpForm
-from .models import Chirp, Reply, UserFollowing
+from .models import Chirps, Reply, UserFollowing
 
 # Create your views here.
 def profile(request):
@@ -41,7 +41,7 @@ def reply_to_chirp(request, chirp_id):
     """
     Allows users to reply to a chirp.
     """
-    chirp = get_object_or_404(Chirp, id=chirp_id)
+    chirp = get_object_or_404(Chirps, id=chirp_id)
     if request.method == "POST":
         content = request.POST.get("content")
         if content:
@@ -75,7 +75,7 @@ def profile_view(request, username):
     Displays the profile page of a user, showing their chirps and follow stats.
     """
     profile_user = get_object_or_404(User, username=username)
-    chirps = Chirp.objects.filter(user=profile_user).order_by('-created_at')
+    chirps = Chirps.objects.filter(user=profile_user).order_by('-created_at')
     followers_count = profile_user.followers.count()
     following_count = profile_user.following.count()
     is_following = request.user.is_authenticated and UserFollowing.objects.filter(user=request.user, following_user=profile_user).exists()

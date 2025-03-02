@@ -1,7 +1,7 @@
 """
 chirper/urls.py
 Created: 2025-02-16
-Updated: 2025-02-16
+Updated: 2025-03-02
 
 Included the app-specific URLs for the chirper app.
 Better maintainability, organization, and scalability then just having all URLs in cong/urls.py

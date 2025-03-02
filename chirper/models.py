@@ -1,3 +1,12 @@
+"""
+chirper/models.py
+Updated: 2025-03-02
+
+Include custom models for the chirper app.
+Uses the Django default User model for other models.
+"""
+
+
 from django.db import models
 
 # To use the user ID from the Django default user table
