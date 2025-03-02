@@ -1,4 +1,5 @@
 """
+Project level conf/urls.py
 URL configuration for conf project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -36,4 +37,7 @@ urlpatterns = [
 
     # User profile URL
     path('profile/<str:username>/', views.profile_view, name='profile'),
+    
+    # Include the chirper app urls
+    path('chirper/', include('chirper.urls')),
 ]
