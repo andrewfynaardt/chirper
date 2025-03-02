@@ -1,22 +1,9 @@
 from django.db import models
 
+# To use the user ID from the Django default user table
+from django.contrib.auth.models import User
+
 # Create your models here.
-
-
-class Users(models.Model):
-    """
-    Information related to each user is stored here.
-    
-    Attributes:
-        user_name (str): The name of the user.
-        email (str): The email address of the user.
-    """
-
-    user_name = models.CharField(max_length=150)
-    email = models.CharField(max_length=150)
-
-    def __str__(self):
-        return self.user_name
 
 
 class Chirps(models.Model):
@@ -31,7 +18,7 @@ class Chirps(models.Model):
     """
     chirp_body = models.CharField(max_length=255)
     user_id = models.ForeignKey(
-        Users,
+        User,
         on_delete=models.SET_NULL,
         null=True
         ) 
