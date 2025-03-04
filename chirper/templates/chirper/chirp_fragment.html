@@ -1,0 +1,45 @@
+<!-- chirp_fragment.html 
+Created: 2025-03-03
+Updated: 2025-03-03
+
+This is the template for just the chirps.
+Each chirp will be a bootstrap card.
+-->
+
+
+{% for chirp in chirps %}
+<!-- A card to display chirp-->
+<div class="card mt-2 text-start">
+
+<div class="row card-header">
+    <div class="col text-start">
+        {{ chirp.user_id.username }}
+    </div>
+    <div class="col text-end">
+        Created at {{ chirp.created_time }}
+    </div>
+
+</div>
+
+<div class="card-body">
+    <p class="card-text">
+        {{ chirp.chirp_body }}
+    </p> 
+</div>
+
+<!-- Card footer: like button, write reply button, number of replies of the chirp-->
+<div class="row card-footer align-items-center">
+    <div class="col text-start">
+    <a href="#" class="btn like-btn-toggle btn-outline-primary">Like</a>
+    </div>
+    <div class="col text-center">
+    <a href="#" class="btn btn-primary">write a reply</a>
+    </div>
+    <div class="col text-end text-body-secondary">
+    35 replies
+    </div>
+</div>
+</div>
+<!-- end of chirp card-->
+
+{% endfor %}

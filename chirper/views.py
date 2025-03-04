@@ -1,3 +1,12 @@
+"""
+chirper/views.py
+Updated: 2025-03-03
+
+Django views are created here.
+"""
+
+
+
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
@@ -6,16 +15,17 @@ from .forms import ChirpForm
 from .models import Chirps, Reply, UserFollowing
 
 # Create your views here.
+
 def profile(request):
     return render(request, 'profile.html')
 
 def home(request):
-    return render(request, 'home.html')
+    return render(request, 'chirper/home.html')
 
-# Existing chirp view
-def chirp_view(request):
+# Existing chirpForm view
+def chirpForm_view(request):
     """
-    The view to display the chirpForm to users.
+    The view to display the chirpForm to users to create their chirp.
     """
     
     if request.method == 'POST':
@@ -26,13 +36,19 @@ def chirp_view(request):
             chirp.created_time = timezone.now()
             chirp.parent_chirp_id = None  # Update if replying to a chirp
             chirp.save()
-            return redirect('home')  # Ensure 'home' exists in your urls.py
+            return redirect('chirper/home')  # Ensure 'home' exists in your urls.py
 
     else:
         form = ChirpForm()
 
     return render(request, 'chirper/chirp_form.html', {'form': form})
 
+def chirp_view(request):
+    """
+    The view to show chirps from the database to the user.
+    """
+    chirps = Chirps.objects.all()
+    return render(request, "chirper/chirp_fragment.html", {"chirps": chirps})
 
 # New Views for Replies and Following Users
 

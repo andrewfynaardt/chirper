@@ -1,6 +1,6 @@
 <!-- home.html 
 Created: 2025-02-25
-Updated: 2025-02-25
+Updated: 2025-03-03
 
 This is the template for the home page, it used bootstrap for layout.
 the home page has the the following section:
@@ -18,19 +18,19 @@ the home page has the the following section:
     <title>Chirper Home</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>        
-        /* For the user to create new post */
-        .bottom-section {
-          position: fixed;
-          bottom: 0;
-        }
+      /* For the user to create new post */
+      .bottom-section {
+        position: fixed;
+        bottom: 0;
+      }
 
-        /* To make it fill the whole width of screen*/
-        .top-bar-container {
-          padding: 0;
-        }
-
-      
-      </style>
+      /* To make it fill the whole width of screen*/
+      .top-bar-container {
+        padding: 0;
+      }
+    </style>
+    <!-- htmx setup-->
+    <script src="https://unpkg.com/htmx.org@2.0.4"></script>
 
   </head>
   <body>
@@ -60,7 +60,13 @@ the home page has the the following section:
 
     <!-- Display chirps -->
     <div class="container p-2 bg-primary text-white">
-      
+      <div id="chirps-container" hx-get="{% url 'chirp_view' %}" hx-trigger="load">
+        <!-- Chirps will be loaded here dynamically -->
+      </div>
+    <!-- Start of the commented section (to test htmx chirp card)-->
+    <script type="text/javascript">
+    /*
+      {% include 'chirper/chirp_fragment.html' %}
       <!-- A card to display chirp-->
       <div class="card mt-2 text-start">
         
@@ -132,6 +138,9 @@ the home page has the the following section:
         </div>
       </div>
       <!-- end of chirp card-->
+    */
+    </script>
+    <!-- End of the commented section (to test htmx chirp card)-->
 
 
       

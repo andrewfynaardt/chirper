@@ -9,6 +9,8 @@ Uses the Django default User model for other models.
 
 from django.db import models
 
+# Create your models here.
+
 # To use the user ID from the Django default user table
 from django.contrib.auth.models import User
 
@@ -39,7 +41,6 @@ class Chirps(models.Model):
         return self.chirp_body[:20]
     
 
-# Create your models here.
 class Reply(models.Model):
     """
     Represents a reply to a chirp.
