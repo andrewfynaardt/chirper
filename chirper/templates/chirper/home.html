@@ -60,90 +60,10 @@ the home page has the the following section:
 
     <!-- Display chirps -->
     <div class="container p-2 bg-primary text-white">
+      <!-- Use htmx to load chirps as card (code in chirp_fragment.html)-->
       <div id="chirps-container" hx-get="{% url 'chirp_view' %}" hx-trigger="load">
         <!-- Chirps will be loaded here dynamically -->
       </div>
-    <!-- Start of the commented section (to test htmx chirp card)-->
-    <script type="text/javascript">
-    /*
-      {% include 'chirper/chirp_fragment.html' %}
-      <!-- A card to display chirp-->
-      <div class="card mt-2 text-start">
-        
-        <div class="row card-header">
-          <div class="col text-start">
-            User_ID and User_name
-          </div>
-          <div class="col text-end">
-            Created at 2025-02-25
-          </div>
-
-        </div>
-        
-        <div class="card-body">
-           <p class="card-text">The content of the chirp goes here - example: With supporting text 
-            below as a natural lead-in to additional content.
-            example: With supporting text below as a natural lead-in to additional content.
-            example--:--(255char)
-           </p> 
-        </div>
-
-        <!-- Card footer: like button, wrtie reply button, number of replies of the chirp-->
-        <div class="row card-footer align-items-center">
-          <div class="col text-start">
-            <a href="#" class="btn like-btn-toggle btn-outline-primary">Like</a>
-          </div>
-          <div class="col text-center">
-            <a href="#" class="btn btn-primary">write a reply</a>
-          </div>
-          <div class="col text-end text-body-secondary">
-            35 replies
-          </div>
-        </div>
-      </div>
-      <!-- end of chirp card-->
-
-      <!-- A card to display chirp-->
-      <div class="card mt-2 text-start">
-        
-        <div class="row card-header">
-          <div class="col text-start">
-            User_ID and User_name
-          </div>
-          <div class="col text-end">
-            Created at 2025-02-25
-          </div>
-
-        </div>
-        
-        <div class="card-body">
-           <p class="card-text">The content of the chirp goes here - example: With supporting text 
-            below as a natural lead-in to additional content.
-            example: With supporting text below as a natural lead-in to additional content.
-            example--:--(255char)
-           </p> 
-        </div>
-
-        <!-- Card footer: like button, wrtie reply button, number of replies of the chirp-->
-        <div class="row card-footer align-items-center">
-          <div class="col text-start">
-            <a href="#" class="btn like-btn-toggle btn-outline-primary">Like</a>
-          </div>
-          <div class="col text-center">
-            <a href="#" class="btn btn-primary">write a reply</a>
-          </div>
-          <div class="col text-end text-body-secondary">
-            35 replies
-          </div>
-        </div>
-      </div>
-      <!-- end of chirp card-->
-    */
-    </script>
-    <!-- End of the commented section (to test htmx chirp card)-->
-
-
-      
     </div>
 
 
