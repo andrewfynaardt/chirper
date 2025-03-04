@@ -14,10 +14,9 @@ from django.views.generic import TemplateView
 urlpatterns = [
     # The homepage for chirper (include menu and chirp view)
     path('home/', home, name='home'),
-    # To lead the chirp_view (to display chirps from database)
-    path("chirps/", chirp_view, name="chirp_view"),  # This is important
-    # The template for chirp_form
-    path('chirp_form/', chirpForm_view, name='chirp_form'),
-    # The success page after user uploaded their chirp
-    path('success/', TemplateView.as_view(template_name="chirper/success.html"), name='success'),
+    # To load the chirp_view (to display chirps from database)
+    path("chirps/", chirp_view, name="chirp_view"),  
+
+    # To load the chirpForm_view (so user can enter data)
+    path('create_chirp/', chirpForm_view, name='chirp_form'),
 ]

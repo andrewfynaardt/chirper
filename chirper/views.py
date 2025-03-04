@@ -20,7 +20,9 @@ def profile(request):
     return render(request, 'profile.html')
 
 def home(request):
-    return render(request, 'chirper/home.html')
+    chirps = Chirps.objects.all()
+    form = ChirpForm()
+    return render(request, 'chirper/home.html', {'chirps': chirps, 'form': form})
 
 # Existing chirpForm view
 def chirpForm_view(request):
@@ -36,12 +38,12 @@ def chirpForm_view(request):
             chirp.created_time = timezone.now()
             chirp.parent_chirp_id = None  # Update if replying to a chirp
             chirp.save()
-            return redirect('chirper/home')  # Ensure 'home' exists in your urls.py
+            return redirect('home')
 
     else:
         form = ChirpForm()
 
-    return render(request, 'chirper/chirp_form.html', {'form': form})
+    return render(request, 'chirper/home.html')
 
 def chirp_view(request):
     """
