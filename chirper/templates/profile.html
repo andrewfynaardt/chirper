@@ -1,3 +1,9 @@
-<h1>Logged in as: {{ request.user.username }}</h1>
+<!--Extends from base template for formate reusability-->
+{% extends "base.html" %}
 
-<a href="{%url 'account_logout' %}">Logout</a>
+{% block content %}
+<!--Use django's request object to display the currently logged in user-->
+<h1>Logged in as: {{ request.user.username }}</h1>
+<!--A logout link button-->
+<a href="{% url 'account_logout' %}">Logout</a>
+{% endblock %}

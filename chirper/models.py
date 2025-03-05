@@ -1,5 +1,7 @@
 # Create your models here.
 from django.db import models
+from django.utils import timezone
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -32,13 +34,20 @@ class Chirps(models.Model):
     """
 
     chirp_body = models.CharField(max_length=255)
-    user_id = models.ForeignKey(Users, on_delete=models.SET_NULL, null=True)
-    created_time = models.DateTimeField()
+    user_id = models.ForeignKey(
+        User, on_delete=models.SET_NULL, null=True, related_name="chirps"
+    )
+    created_time = models.DateTimeField(default=timezone.now)
     parent_chirp_id = models.ForeignKey(
         "self",  # Another chirp's ID
         on_delete=models.SET_NULL,
         null=True,
     )
+    likes = models.ManyToManyField(User, related_name="liked_chirps", blank=True)
+
+    # Function that returns the total number of likes
+    def total_likes(self):
+        return self.likes.count()
 
     def __str__(self):
-        return self.chirp_body[:20]
+        return f"{self.user_id.username if self.user_id else 'Unknown'}: {self.chirp_body[:20]}"
