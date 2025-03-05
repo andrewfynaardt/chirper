@@ -8,12 +8,22 @@ Better maintainability, organization, and scalability then just having all URLs 
 """
 
 from django.urls import path
-from .views import chirp_view
-from django.views.generic import TemplateView
+from .views import chirp_view, home, profile, like_chirp, still_dev
+from django.shortcuts import render
+
 
 urlpatterns = [
-    # The template for chirp_form
-    path('chirp_form/', chirp_view, name='chirp_form'),
+    # Template for home page
+    path("", home, name="home"),
+    # Profiles Template
+    path("profile/", profile, name="profile"),
     # The success page after user uploaded their chirp
-    path('success/', TemplateView.as_view(template_name="chirper/success.html"), name='success'),
+    path(
+        "success/",
+        lambda request: render(request, "success.html"),
+        name="success",
+    ),  # Success page
+    path("null/", still_dev, name="still_dev"),
+    path("like/<int:chirp_id>/", like_chirp, name="like_chirp"),
+    path("create/", chirp_view, name="chirp_view"),
 ]

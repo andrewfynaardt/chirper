@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% extends "base.html" %}
 
 {% block content %}
@@ -44,3 +45,14 @@
         <p>No chirps yet.</p>
     {% endfor %}
 {% endblock %}
+=======
+<!--Extends from base template for formate reusability-->
+{% extends "base.html" %}
+
+{% block content %}
+<!--Use django's request object to display the currently logged in user-->
+<h1>Logged in as: {{ request.user.username }}</h1>
+<!--A logout link button-->
+<a href="{% url 'account_logout' %}">Logout</a>
+{% endblock %}
+>>>>>>> likes-feature

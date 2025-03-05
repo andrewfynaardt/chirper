@@ -1,0 +1,57 @@
+<!--Chirper Post Boxes: margin-top, left card at the top-->
+<div class="card mt-2 text-start chirp-card">
+    <!--Top section of box displaying user and created time of chirp-->
+    <div class="row card-header">
+        <div class="col text-start">
+            <!--Shows the Chirp User-->
+            <strong> {% if chirp.user_id %}
+                @{{ chirp.user_id }}
+                {% else %}
+                Anonymous
+                {% endif %}</strong>
+        </div>
+        <div class="col text-end">
+            <!--Displays the time chirp was created-->
+            <small>Created at: {{ chirp.created_time }}</small>
+        </div>
+    </div>
+    <!--Body of card/box that contains the main content of the chirp-->
+    <div class="card-body">
+        <!--Displays the text of the chirp-->
+        <p class="card-text">{{ chirp.chirp_body }}</p>
+    </div>
+
+    <!-- Bottom of the box/card that contains: like button, reply button, number of replies -->
+    <div class="row card-footer align-items-center">
+        <div class="col text-start">
+            <!--Like button with HTMX inclusion-->
+            <!--    <a href="#" class="btn like-btn-toggle btn-outline-primary">♡</a>-->
+            <button class="btn like-btn-toggle 
+        {% if request.user in chirp.likes.all %}btn-primary{% else %}btn-outline-primary{% endif %}"
+                hx-post="{% url 'like_chirp' chirp.id %}" hx-trigger="click" hx-target="#like-count-{{ chirp.id }}"
+                hx-swap="innerHTML" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' data-chirp-id="{{ chirp.id }}"
+                hx-indicator="#like-indicator-{{ chirp.id }}" id="like-button-{{ chirp.id }}">
+                {% if request.user in chirp.likes.all %}
+                ❤️
+                {% else %}
+                ♡
+                {% endif %}
+            </button>
+
+            <!-- Like count that updates dynamically -->
+            <span id="like-count-{{ chirp.id }}" hx-swap-oob="true">{{ chirp.total_likes }}</span>
+        </div>
+        <script>
+
+        </script>
+
+        <div class="col text-center">
+            <!--Reply button-->
+            <a href="#" class="btn btn-primary">Write a Reply</a>
+        </div>
+        <div class="col text-end text-body-secondary">
+            <!--Displays the total number of replies for chirp-->
+            {{ chirp.replies.count }} replies
+        </div>
+    </div>
+</div>

@@ -5,29 +5,57 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Users',
+            name="Users",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('user_name', models.CharField(max_length=150)),
-                ('email', models.CharField(max_length=150)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("user_name", models.CharField(max_length=150)),
+                ("email", models.CharField(max_length=150)),
             ],
         ),
         migrations.CreateModel(
-            name='Chirps',
+            name="Chirps",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('chirp_body', models.CharField(max_length=255)),
-                ('created_time', models.DateTimeField()),
-                ('parent_chirp_id', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='chirper.chirps')),
-                ('user_id', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='chirper.users')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("chirp_body", models.CharField(max_length=255)),
+                ("created_time", models.DateTimeField()),
+                (
+                    "parent_chirp_id",
+                    models.ForeignKey(
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        to="chirper.chirps",
+                    ),
+                ),
+                (
+                    "user_id",
+                    models.ForeignKey(
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        to="chirper.users",
+                    ),
+                ),
             ],
         ),
     ]
