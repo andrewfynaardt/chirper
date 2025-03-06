@@ -4,8 +4,8 @@
     <div class="row card-header">
         <div class="col text-start">
             <!--Shows the Chirp User-->
-            <strong> {% if chirp.user_id %}
-                @{{ chirp.user_id }}
+            <strong> {% if request.user.username != null %}
+                @{{ request.user.username }}
                 {% else %}
                 Anonymous
                 {% endif %}</strong>
