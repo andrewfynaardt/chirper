@@ -6,7 +6,6 @@ from django.http import HttpRequest, JsonResponse
 from .models import Chirps, Reply, UserFollowing, User
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
-from chirper import views
 
 
 # Create your views here.
@@ -58,11 +57,11 @@ def reply_to_chirp(request, chirp_id):
     chirp = get_object_or_404(Chirps, id=chirp_id)
     if request.method == "POST":
         content = request.POST.get("content")
-        if request.headers.get("HX-Request"):
-            return render(request, "partials/reply.html", {"reply": views.reply})
+        if content:
+            Reply.objects.create(user=request.user, chirp=chirp, content=content)
     return redirect(
         "chirp_detail", chirp_id=chirp.id
-    )  # Ensure chirp_detail is defined in urls.py
+    )  # Ensure 'chirp_detail' exists in urls.py
 
 
 @login_required

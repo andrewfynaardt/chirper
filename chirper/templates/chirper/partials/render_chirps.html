@@ -41,35 +41,15 @@
             <!-- Like count that updates dynamically -->
             <span id="like-count-{{ chirp.id }}" hx-swap-oob="true">{{ chirp.total_likes }}</span>
         </div>
-        <!-- Like count that updates dynamically -->
-        <span id="like-count-{{ chirp.id }}" hx-swap-oob="true">{{ chirp.total_likes }}</span>
-    </div>
 
-    <div class="col text-center">
-        <!--Reply Button that toggles the reply form -->
-        <button class="btn btn-primary reply-btn" data-chirp-id="{{ chirp.id }}">Write a Reply</button>
 
-        <!-- Hidden reply form -->
-        <div id="reply-form-{{ chirp.id }}" class="reply-form" style="display: none; margin-top: 10px;">
-            <form method="POST" action="{% url 'reply_to_chirp' chirp.id %}"
-                hx-post="{% url 'reply_to_chirp' chirp.id %}" hx-target="#chirp-replies-{{ chirp.id }}"
-                hx-swap="beforeend">
-                {% csrf_token %}
-                <input type="text" name="content" placeholder="Type your reply..." required class="form-control"
-                    style="margin-bottom: 5px;">
-                <button type="submit" class="btn btn-success btn-sm">Submit Reply</button>
-            </form>
+        <div class="col text-center">
+            <!--Reply button-->
+            <a href="#" class="btn btn-primary">Write a Reply</a>
+        </div>
+        <div class="col text-end text-body-secondary">
+            <!--Displays the total number of replies for chirp-->
+            {{ chirp.replies.count }} replies
         </div>
     </div>
-
-    <div class="col text-end text-body-secondary">
-        <!-- Displays the total number of replies dynamically -->
-        <span id="reply-count-{{ chirp.id }}">{{ chirp.replies.count }}</span> replies
-    </div>
-
-    <!-- Reply List -->
-    <div id="chirp-replies-{{ chirp.id }}">
-        {% for reply in chirp.replies.all %}
-        {% include 'partials/reply.html' with reply=reply %}
-        {% endfor %}
-    </div>
+</div>
