@@ -22,7 +22,7 @@ Chirper is a social media platform where users can sign up, create chirps (messa
 `still_dev`, `django.views.generic.TemplateView`, `django.shortcuts.render`, `redirect`, 
 `get_object_or_404`, `django.contrib.auth.decorators.login_required`, `ChirpForm`, `Chirp`, 
 `Reply`, `UserFollowing`, `User`, `os`, `django.core.asgi.get_asgi_application`, 
-`django.core.wsgi.get_wsgi_application` libraries
+`django.core.wsgi.get_wsgi_application` libraries.
 
 ## How to Install
 
