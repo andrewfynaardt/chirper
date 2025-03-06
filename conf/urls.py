@@ -30,8 +30,8 @@ urlpatterns = [
     # Chirp-related URLs
     path("chirp/<int:chirp_id>/reply/", views.reply_to_chirp, name="reply_to_chirp"),
     # Follow/Unfollow URLs
-    path("user/<int:user_id>/follow/", views.follow_user, name="follow_user"),
-    path("user/<int:user_id>/unfollow/", views.unfollow_user, name="unfollow_user"),
-    # User profile URL
-    path("profile/<str:username>/", views.profile_view, name="profile"),
+    # path("user/<int:user_id>/follow/", views.follow_user, name="follow_user"),
+    # path("user/<int:user_id>/unfollow/", views.unfollow_user, name="unfollow_user"),
+    # # User profile URL
+    # path("profile/<str:username>/", views.profile_view, name="profile"),
 ]
