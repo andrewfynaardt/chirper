@@ -228,12 +228,12 @@ Updated: 2025-03-05
                             <!-- Render Chirp Form Dynamically -->
                             {% if form %}
                             {{ form.as_p }}
-                            {% else %}
-                            <p>Error: Form is not available.</p>
-                            {% endif %}
-
                             <!-- Submit Button -->
                             <button type="submit" class="btn btn-primary">Post Chirp</button>
+                            {% else %}
+                            <a href="{% url 'account_login' %}" class="btn btn-warning">Login</a> to post a chirp.
+                            {% endif %}
+
                         </form>
                     </div>
                 </div>
