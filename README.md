@@ -24,29 +24,6 @@ Chirper is a social media platform where users can sign up, create chirps (messa
 `Reply`, `UserFollowing`, `User`, `os`, `django.core.asgi.get_asgi_application`, 
 `django.core.wsgi.get_wsgi_application` libraries
 
-## Usage
-
-### Example:
-- Sign up on the website using your email.
-- Once logged in, click on the "Create Chirp" button to post a chirp.
-- If you see a chirp you like, click the heart icon to like it.
-- You can reply to any chirp by clicking the "Reply" button below it.
-
-### How to Connect to the Website:
-1. Visit the website at [insert your deployed URL here].
-2. Sign up or log in using your credentials.
-3. Create a chirp by typing your message in the text box.
-4. You can add rich text such as bold text, images, and videos using the editor.
-5. You can like chirps you enjoy and reply to chirps from others.
-6. Use the filter feature to customize the chirps you see.
-
-## Instructions for Anyone to Use
-
-1. **Sign Up**: Click on "Sign Up" on the homepage and enter your email, username, and password.
-2. **Create Chirps**: After logging in, you can create chirps up to 255 characters. Use the rich text editor to include bold text, images, and videos.
-3. **Like and Reply**: Browse through chirps and interact with them by liking or replying.
-4. **Filter Chirps**: Use the filter option to refine the content you're seeing based on specific criteria (e.g., most liked, latest, etc.).
-
 ## How to Install
 
 To run Chirper locally on your machine, follow these steps:
@@ -55,6 +32,43 @@ To run Chirper locally on your machine, follow these steps:
 2. Install the required dependencies from the `requirements.txt` file.
 3. Start the development server using Django commands.
 4. Open your browser and go to the local server address to access the website.
+
+## How to Use the Website
+
+1. **Sign Up**: 
+   - Visit [http://127.0.0.1:8000/] and click on "Sign Up".
+   - Enter your email, username, and password to create an account.
+   - If you already have an account, click "Log In" and use your credentials.
+
+2. **Create Chirps**: 
+   - After logging in, click on the "Create Chirp" button to post a chirp.
+   - You can type up to 255 characters and use the rich text editor to add bold text, images, or videos.
+
+3. **Like and Reply**: 
+   - Browse through chirps from other users and interact with them.
+   - Click the heart icon to like a chirp.
+   - To reply, click the "Reply" button below the chirp you want to respond to.
+
+4. **Filter Chirps**: 
+   - Use the filter feature to customize the chirps you see.
+   - Filter by criteria like most liked, latest posts, or other options available.
+
+## Example Usage
+- **Sign up** on the website using your email.
+- **Post a chirp** by clicking "Create Chirp".
+- **Like chirps** you enjoy by clicking the heart icon.
+- **Reply to chirps** using the "Reply" button.
+
+## Contributing
+
+Contributions are welcome! To contribute to the project:
+
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix.
+3. Make your changes and ensure the code is working correctly.
+4. Submit a pull request with a description of your changes.
+
+Please ensure that your code follows the existing style and includes tests for any new features.
 
 ## Contact
 
