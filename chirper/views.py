@@ -9,6 +9,10 @@ from .models import Chirps, Reply, UserFollowing, User
 def profile(request):
     return render(request, "profile.html")
 
+# place holder to let user know page is still in development
+def still_dev(request):
+    return render(request, "still_dev.html")
+
 # Home view
 def home(request):
     chirps = Chirps.objects.all().order_by("-created_time")  # Fetch chirps

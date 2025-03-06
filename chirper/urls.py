@@ -4,7 +4,7 @@ from django.views.generic import TemplateView
 
 urlpatterns = [
     # Home page template
-    path("", home, name="home"),  # Added home URL
+    path("home/", home, name="home"),  # Added home URL
     
     # Profile page
     path("profile/", profile, name="profile"),
