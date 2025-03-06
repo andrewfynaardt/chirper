@@ -58,7 +58,7 @@ To run Chirper locally on your machine, follow these steps:
 
 2. **Create Chirps**: 
    - After logging in, click on the "Create Chirp" button to post a chirp.
-   - You can type up to 255 characters and use the rich text editor to add bold text, images, or videos.
+   - You can type up to 255 characters and use the rich text editor.
 
 3. **Like and Reply**: 
    - Browse through chirps from other users and interact with them.
