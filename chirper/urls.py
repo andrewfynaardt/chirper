@@ -1,19 +1,23 @@
-"""
-chirper/urls.py
-Created: 2025-02-16
-Updated: 2025-03-02
-
-Included the app-specific URLs for the chirper app.
-Better maintainability, organization, and scalability then just having all URLs in cong/urls.py
-"""
-
 from django.urls import path
-from .views import chirp_view
+from .views import chirp_view, home, profile, like_chirp, still_dev
 from django.views.generic import TemplateView
 
 urlpatterns = [
-    # The template for chirp_form
-    path('chirp_form/', chirp_view, name='chirp_form'),
-    # The success page after user uploaded their chirp
-    path('success/', TemplateView.as_view(template_name="chirper/success.html"), name='success'),
+    # Home page template
+    path("", home, name="home"),  # Added home URL
+    
+    # Profile page
+    path("profile/", profile, name="profile"),
+    
+    # Success page after user uploaded their chirp
+    path('success/', TemplateView.as_view(template_name="success.html"), name='success'),  # Fixed template path
+    
+    # Still in development page
+    path("null/", still_dev, name="still_dev"),
+    
+    # Like/Unlike a chirp
+    path("like/<int:chirp_id>/", like_chirp, name="like_chirp"),
+    
+    # Create a new chirp
+    path('create/', chirp_view, name='chirp_view'),  # Using 'chirp_view' to match the original name
 ]
