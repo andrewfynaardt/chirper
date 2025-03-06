@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
+from django.http import HttpRequest, JsonResponse
 from .forms import ChirpForm
-from .models import Chirp, Reply, UserFollowing, User
+from .models import Chirps, Reply, UserFollowing, User
 
 # Profile view
 def profile(request):
@@ -10,7 +11,7 @@ def profile(request):
 
 # Home view
 def home(request):
-    chirps = Chirp.objects.all().order_by("-created_time")  # Fetch chirps
+    chirps = Chirps.objects.all().order_by("-created_time")  # Fetch chirps
     form = ChirpForm()
     return render(request, "home.html", {"chirps": chirps, "form": form})
 
@@ -42,7 +43,7 @@ def reply_to_chirp(request, chirp_id):
     """
     Allows users to reply to a chirp.
     """
-    chirp = get_object_or_404(Chirp, id=chirp_id)
+    chirp = get_object_or_404(Chirps, id=chirp_id)
     if request.method == "POST":
         content = request.POST.get("content")
         if content:
@@ -76,10 +77,10 @@ def profile_view(request, username):
     Displays the profile page of a user, showing their chirps and follow stats.
     """
     profile_user = get_object_or_404(User, username=username)
-    chirps = Chirp.objects.filter(user=profile_user).order_by("-created_time")  # Use 'created_time'
+    chirps = Chirps.objects.filter(user=profile_user).order_by("-created_time")  # Use 'created_time'
     
-    followers_count = UserFollowing.objects.filter(following_user=profile_user).count()
-    following_count = UserFollowing.objects.filter(user=profile_user).count()
+    # followers_count = UserFollowing.objects.filter(following_user=profile_user).count()
+    # following_count = UserFollowing.objects.filter(user=profile_user).count()
 
     # is_following = (
     #     request.user.is_authenticated
