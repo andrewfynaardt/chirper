@@ -29,7 +29,7 @@ def chirp_view(request):
             chirp.created_time = timezone.now()
             chirp.parent_chirp_id = None  # Update if replying to a chirp
             chirp.save()
-            return redirect("home")  # Ensure 'home' exists in urls.py
+            return redirect("success")
 
     else:
         form = ChirpForm()
@@ -49,26 +49,26 @@ def reply_to_chirp(request, chirp_id):
             Reply.objects.create(user=request.user, chirp=chirp, content=content)
     return redirect("chirp_detail", chirp_id=chirp.id)  # Ensure 'chirp_detail' exists in urls.py
 
-# Follow a user
-@login_required
-def follow_user(request, user_id):
-    """
-    Allows users to follow another user.
-    """
-    user_to_follow = get_object_or_404(User, id=user_id)
-    if request.user != user_to_follow:
-        UserFollowing.objects.get_or_create(user=request.user, following_user=user_to_follow)
-    return redirect("profile_view", username=user_to_follow.username)  # Ensure 'profile_view' exists
+# # Follow a user
+# @login_required
+# def follow_user(request, user_id):
+#     """
+#     Allows users to follow another user.
+#     """
+#     user_to_follow = get_object_or_404(User, id=user_id)
+#     if request.user != user_to_follow:
+#         UserFollowing.objects.get_or_create(user=request.user, following_user=user_to_follow)
+#     return redirect("profile_view", username=user_to_follow.username)  # Ensure 'profile_view' exists
 
-# Unfollow a user
-@login_required
-def unfollow_user(request, user_id):
-    """
-    Allows users to unfollow another user.
-    """
-    user_to_unfollow = get_object_or_404(User, id=user_id)
-    UserFollowing.objects.filter(user=request.user, following_user=user_to_unfollow).delete()
-    return redirect("profile_view", username=user_to_unfollow.username)  # Ensure 'profile_view' exists
+# # Unfollow a user
+# @login_required
+# def unfollow_user(request, user_id):
+#     """
+#     Allows users to unfollow another user.
+#     """
+#     user_to_unfollow = get_object_or_404(User, id=user_id)
+#     UserFollowing.objects.filter(user=request.user, following_user=user_to_unfollow).delete()
+#     return redirect("profile_view", username=user_to_unfollow.username)  # Ensure 'profile_view' exists
 
 # Display user profile
 def profile_view(request, username):
@@ -81,10 +81,10 @@ def profile_view(request, username):
     followers_count = UserFollowing.objects.filter(following_user=profile_user).count()
     following_count = UserFollowing.objects.filter(user=profile_user).count()
 
-    is_following = (
-        request.user.is_authenticated
-        and UserFollowing.objects.filter(user=request.user, following_user=profile_user).exists()
-    )
+    # is_following = (
+    #     request.user.is_authenticated
+    #     and UserFollowing.objects.filter(user=request.user, following_user=profile_user).exists()
+    # )
 
     return render(
         request,
@@ -92,8 +92,23 @@ def profile_view(request, username):
         {
             "profile_user": profile_user,
             "chirps": chirps,
-            "followers_count": followers_count,
-            "following_count": following_count,
-            "is_following": is_following,
+            # "followers_count": followers_count,
+            # "following_count": following_count,
+            # "is_following": is_following,
         }
     )
+
+
+@login_required
+def like_chirp(request, chirp_id):
+    """Lke/Unlike Chirps"""
+    chirp = get_object_or_404(Chirps, id=chirp_id)
+
+    if request.user in chirp.likes.all():
+        chirp.likes.remove(request.user)  # Unlike
+        liked = False
+    else:
+        chirp.likes.add(request.user)  # Like
+        liked = True
+
+    return JsonResponse(chirp.total_likes())

@@ -25,6 +25,11 @@ class Chirps(models.Model):
         on_delete=models.SET_NULL,
         null=True
     ) 
+    likes = models.ManyToManyField(User, related_name="liked_chirps", blank=True)
+
+    # Function that returns the total number of likes
+    def total_likes(self):
+        return self.likes.count()
 
     def __str__(self):
         return self.chirp_body[:20]
