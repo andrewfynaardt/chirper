@@ -269,6 +269,25 @@
                 });
             });
         </script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                document.querySelectorAll(".reply-btn").forEach(button => {
+                    button.addEventListener("click", function () {
+                        let chirpId = this.getAttribute("data-chirp-id");
+                        let replyForm = document.getElementById(`reply-form-${chirpId}`);
+
+                        // Toggle visibility of the reply form
+                        if (replyForm.style.display === "none") {
+                            replyForm.style.display = "block";
+                        } else {
+                            replyForm.style.display = "none";
+                        }
+                    });
+                });
+            });
+        </script>
+
 </body>
 
 </html>

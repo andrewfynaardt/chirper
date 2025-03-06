@@ -13,10 +13,8 @@ from django.shortcuts import render
 
 
 urlpatterns = [
-    # Template for home page
-    path("", home, name="home"),
-    # Profiles Template
-    path("profile/", profile, name="profile"),
+    path("", home, name="home"),  # Template for home page
+    path("profile/", profile, name="profile"),  #  Profile page
     # The success page after user uploaded their chirp
     path(
         "success/",

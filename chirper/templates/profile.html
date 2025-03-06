@@ -1,46 +1,9 @@
+<!--Extends from base template for formate reusability-->
 {% extends "base.html" %}
 
 {% block content %}
+<!--Use django's request object to display the currently logged in user-->
 <h1>Logged in as: {{ request.user.username }}</h1>
+<!--A logout link button-->
 <a href="{% url 'account_logout' %}">Logout</a>
-
-<h2>{{ profile_user.username }}'s Profile</h2>
-<p>Followers: {{ followers_count }} | Following: {{ following_count }}</p>
-
-{% if request.user.is_authenticated and request.user != profile_user %}
-{% if is_following %}
-<form action="{% url 'unfollow_user' profile_user.id %}" method="post" style="margin-bottom: 10px;">
-    {% csrf_token %}
-    <button type="submit">Unfollow</button>
-</form>
-{% else %}
-<form action="{% url 'follow_user' profile_user.id %}" method="post" style="margin-bottom: 10px;">
-    {% csrf_token %}
-    <button type="submit">Follow</button>
-</form>
-{% endif %}
-{% endif %}
-
-<h3>Chirps</h3>
-{% for chirp in chirps %}
-<div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 15px;">
-    <p><strong>{{ chirp.user.username }}</strong>: {{ chirp.content }}</p>
-
-    <form action="{% url 'reply_to_chirp' chirp.id %}" method="post" style="margin-top: 5px;">
-        {% csrf_token %}
-        <input type="text" name="content" placeholder="Reply..." required>
-        <button type="submit">Reply</button>
-    </form>
-
-    {% if chirp.replies.all %}
-    <ul style="margin-top: 5px; padding-left: 20px;">
-        {% for reply in chirp.replies.all %}
-        <li><strong>{{ reply.user.username }}</strong>: {{ reply.content }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-</div>
-{% empty %}
-<p>No chirps yet.</p>
-{% endfor %}
 {% endblock %}
