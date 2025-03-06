@@ -1,23 +1,19 @@
 <!-- comment_form.html 
 Created: 2025-02-16
-Updated: 2025-02-16
+Updated: 2025-03-05
 
 This is the template for the users to enter their chirp body into ChirpForm
 -->
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Chirp Form</title>
-</head>
-<body>
-    <h1>Enter your Chirp - max 255 characters</h1>
-    <form method="post">
-        <!-- Generate CSRF token for better security -->
-        {% csrf_token %}
-        <!-- Render the form fields as <p> paragraphs -->
-        {{ form.as_p }}
-        <!-- Provide "submit" with the text "Post" to users -->
-        <button type="submit">Post</button>
-    </form>
-</body>
-</html>
+<!--Extends from base template for formate reusability-->
+{% extends "base.html" %}
+<!--content block to be inserted in base template-->
+{% block content %}
+<h1>Enter your Chirp - max 255 characters</h1>
+<!--Creates a form for user to write a new chirp-->
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <!--Submit button for chirp posts-->
+    <button type="submit" class="btn btn-primary">Post</button>
+</form>
+{% endblock %}

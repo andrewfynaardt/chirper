@@ -1,0 +1,29 @@
+<!-- home.html 
+Created: 2025-02-25
+Updated: 2025-03-05
+
+This is the template for the home page, it used bootstrap for layout.
+the home page has the the following section:
+    top bar : has web app name and login button
+    main section: display chirp posts from the database
+    bottom section: place for users to create their chirp (new chirp or reply)
+-->
+
+<!--Extends from base template to reuse the common layout structure-->
+{% extends "base.html" %}
+
+<!--Content block that will be inserted into the base template depending on where block content tag is placed-->
+{% block content %}
+<!--Content container that holds the chirps -->
+<div class="content">
+    <!--Loops through the chirps list, rendering each one individually using the render chirps template-->
+    {% for chirp in chirps %}
+    {% include "chirper/partials/render_chirps.html" %}
+    <!--No chirps to render if list is empty-->
+    {% empty %}
+    <p class="text-center text-muted">No chirps yet. Be the first to post!</p>
+    <!--Ends loop rendering chirps-->
+    {% endfor %}
+</div>
+<!--content block needs to be closed-->
+{% endblock %}

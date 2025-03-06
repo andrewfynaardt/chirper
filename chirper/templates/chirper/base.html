@@ -1,0 +1,278 @@
+<!--
+Updated: 2025-03-05
+-->
+
+<!--Looks for "static" folder in chirper directory to use in template-->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--Adds hidden CSRF Token for Post Requests-->
+    <meta name="csrf-token" content="{{ csrf_token }}">
+    <title>Chirper</title>
+    <!--HTMX Inclusion-->
+    <script src="https://unpkg.com/htmx.org@1.9.5"></script>
+    <!--CSS link reference for styling and design implementations-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!--Google fonts link reference for differnt fonts and typography styling-->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Global Styles */
+        /*Removes default spacing, Montserrat used as font, background color gradient*/
+        body {
+            margin: 0;
+            font-family: 'Montserrat', Arial, sans-serif;
+            background: linear-gradient(155deg, #9ecfff, #ffffff);
+            color: #2C3E50;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+
+        /* Top Panel */
+        /*panel at the top of the page, centers content with even spacing, ensures it stays above other content, provides spacing */
+        .top-panel {
+            background-color: #2C3E50;
+            color: #ffffff;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            z-index: 1000;
+        }
+
+        /*Adds reference to h1: first header*/
+        .top-panel h1 {
+            font-size: 2em;
+            margin: 0;
+        }
+
+        /*Profile button in top righ corener*/
+        .profile button {
+            background-color: #f39c12;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        /* Left Sidebar. Contains: Home, Explore, Notificatins, Messages, Bookmarks, Settings&Privacy, etc. */
+        .container {
+            /*Formats elemnts with even spacing*/
+            display: flex
+        }
+
+        /*Left Sidebar navigation*/
+        .sidebar {
+            background-color: #34495E;
+            width: 250px;
+            padding-top: 60px;
+            /*adds spacing*/
+            min-width: 200px;
+            color: #ffffff;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+
+            overflow-y: auto;
+
+        }
+
+        .sidebar a {
+            color: #ecf0f1;
+            text-decoration: none;
+            margin-bottom: 10px;
+            display: block;
+            padding: 8px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        /*Adds backgroun cover when hovering over option*/
+        .sidebar a:hover {
+            background-color: #3d566e;
+        }
+
+        /* Area of the screen that contains chirps*/
+        .content {
+            display: flex;
+            flex-direction: column;
+            /*Centers Chirps*/
+
+            margin-left: 270px;
+            /* Avoids overlap with top panel*/
+            padding: 80px 20px 20px;
+            width: calc(100% - 270px);
+        }
+
+        /* Chirp Card/Box */
+        .chirp-card {
+            background: white;
+            border-radius: 8px;
+            top: 0;
+            margin-left: -130px;
+            padding: 20px;
+            margin-bottom: 10px;
+            /*Creates shadow under the chirp box*/
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            /*Controls size of the chirp box*/
+            width: 100%;
+            max-width: 700px;
+            display: flex;
+            /* Stacks the chirps on top of each other*/
+            flex-direction: column;
+
+
+
+        }
+
+        /* Create Chirp Button */
+        .create-chirp-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 90%;
+            transform: translateX(-50%);
+            width: 250px;
+            padding: 15px;
+            font-size: 18px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            text-align: center;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        /*Affects backgroun color when hovering over it*/
+        .create-chirp-btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Like Button Styles */
+        .like-btn {
+            border: 1px solid #007bff;
+            color: #007bff;
+            background-color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Top Panel -->
+    <div class="top-panel">
+        <h1>Chirper 🐦‍🔥</h1>
+        <div class="profile">
+            <!--If user is logged in show logout button-->
+            {% if request.user.is_authenticated %}
+            <a href="{% url 'account_logout' %}" class="btn btn-warning">Logout</a>
+            {% else %}
+            <!--If user isn't logged in, show login button-->
+            <a href="{% url 'account_login' %}" class="btn btn-warning">Login</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Sidebar navigation options(Mostly just for aesthetics) -->
+        <div class="sidebar">
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'still_dev' %}">Explore</a>
+            <a href="{% url 'still_dev' %}">Notifications</a>
+            <a href="{% url 'still_dev' %}">Messages</a>
+            <a href="{% url 'still_dev' %}">Bookmarks</a>
+            <a href="{% url 'still_dev' %}">Settings & Privacy</a>
+            <a href="{% url 'still_dev' %}">Help & Support</a>
+            <a href="{% url 'profile' %}">Profile</a>
+        </div>
+
+        <!-- Content Block -->
+        <div class="content">
+            <!--Accesses different templates to dynamically insert content-->
+            {% block content %} {% endblock %}
+        </div>
+
+        <!--Javascript Bootstrap 'Bundle'-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Create New Chirp Button -->
+        <button class="create-chirp-btn" data-bs-toggle="modal" data-bs-target="#chirpModal">
+            Create New Chirp</button>
+
+        <!--Pop Up(Modal) for Creating a New Chirp-->
+        <div class="modal fade" id="chirpModal" tabindex="-1" aria-labelledby="chirpModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!--Pop up header-->
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="chirpModalLabel">Create a New Chirp</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <!-- Modal Body (Includes chirp_form template) -->
+                    <div class="modal-body">
+                        <form method="POST" action="{% url 'chirp_view' %}">
+                            {% csrf_token %}
+
+                            <!-- Render Chirp Form Dynamically -->
+                            {% if form %}
+                            {{ form.as_p }}
+                            {% else %}
+                            <p>Error: Form is not available.</p>
+                            {% endif %}
+
+                            <!-- Submit Button -->
+                            <button type="submit" class="btn btn-primary">Post Chirp</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                document.querySelectorAll('.like-btn-toggle').forEach(button => {
+                    button.addEventListener('click', function (event) {
+                        event.preventDefault(); // Prevents the default button action
+
+                        // Get the like button & count span
+                        let likeCountSpan = document.querySelector(`#like-count-${this.dataset.chirpId}`);
+                        let chirpId = this.dataset.chirpId;
+
+                        // Toggle UI instantly for better UX
+                        if (this.innerHTML.includes('❤️')) {
+                            this.innerHTML = '♡';
+                            this.classList.remove('btn-primary');
+                            this.classList.add('btn-outline-primary');
+                            if (likeCountSpan) {
+                                likeCountSpan.textContent = Math.max(0, parseInt(likeCountSpan.textContent) - 1);
+                            }
+                        } else {
+                            this.innerHTML = '❤️';
+                            this.classList.remove('btn-outline-primary');
+                            this.classList.add('btn-primary');
+                            if (likeCountSpan) {
+                                likeCountSpan.textContent = parseInt(likeCountSpan.textContent) + 1;
+                            }
+                        }
+                    });
+                });
+            });
+        </script>
+</body>
+
+</html>
