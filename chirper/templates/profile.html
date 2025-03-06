@@ -2,8 +2,11 @@
 {% extends "base.html" %}
 
 {% block content %}
+{% if request.user.is_authenticated %}
 <!--Use django's request object to display the currently logged in user-->
-<h1>Logged in as: {{ request.user.username }}</h1>
-<!--A logout link button-->
-<a href="{% url 'account_logout' %}">Logout</a>
+<h1>Hello @{{ request.user.username }} :)</h1>
+{% else %}
+<!--If user isn't logged in, show login button-->
+<h1>Login to view your account</h1>
+{% endif %}
 {% endblock %}
