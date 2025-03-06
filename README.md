@@ -11,8 +11,10 @@ Chirper is a social media platform where users can sign up, create chirps, like 
 - **Reply**: Reply to other users' chirps.
 
 ### Extended Features:
-- **Rich Text Chirps**: Supports bold text, images, videos, and more via Trix or Quill.js.
-- **Filter Chirps**: Filter chirps based on user preferences.
+- **Custom Styling**: The application includes custom CSS, scripts, and Google Fonts to enhance the user interface and provide a visually appealing experience.  
+- **HTMX Integration**: Utilizes HTMX for dynamic content updates, allowing interactions without full-page reloads.  
+- **AJAX-Based Liking**: Users can like chirps instantly without needing to refresh the page, improving responsiveness and user experience.  
+
 
 ## Requirements
 - Python >= 3.12
