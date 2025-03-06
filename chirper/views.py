@@ -24,6 +24,7 @@ def home(request):
     form = ChirpForm()
     return render(request, 'chirper/home.html', {'chirps': chirps, 'form': form})
 
+# @login_required
 # Existing chirpForm view
 def chirpForm_view(request):
     """

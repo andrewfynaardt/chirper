@@ -24,7 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/profile/', views.profile, name='profile'),
     path('accounts/', include('allauth.urls')),
-    
+
     # Home page (redirects to profile for now)
     path('', views.profile, name='profile'),
     

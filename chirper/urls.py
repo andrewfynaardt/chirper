@@ -16,7 +16,7 @@ urlpatterns = [
     path('home/', home, name='home'),
     # To load the chirp_view (to display chirps from database)
     path("chirps/", chirp_view, name="chirp_view"),  
-
     # To load the chirpForm_view (so user can enter data)
     path('create_chirp/', chirpForm_view, name='chirp_form'),
+    
 ]
