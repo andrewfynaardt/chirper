@@ -30,7 +30,7 @@ def chirp_view(request):
 
         if form.is_valid():
             chirp = form.save(commit=False)
-            chirp.user = request.user  # Ensure chirp is linked to user
+            chirp.user_id = request.user  # Ensure chirp is linked to user
             chirp.created_time = timezone.now()
             chirp.parent_chirp_id = None  # Update if replying to a chirp
             chirp.save()
