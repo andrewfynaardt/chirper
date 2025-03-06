@@ -1,6 +1,6 @@
 # Chirper
 
-Chirper is a social media platform where users can sign up, create chirps (messages up to 255 characters), like chirps, reply to others' chirps, and filter content based on their preferences. The platform supports rich text for chirps, allowing for images, videos, bold text, and more.
+Chirper is a social media platform where users can sign up, create chirps, like chirps, reply to others' chirps, and filter content based on their preferences. The platform supports rich text for chirps.
 
 ## Features
 
@@ -15,7 +15,7 @@ Chirper is a social media platform where users can sign up, create chirps (messa
 - **Filter Chirps**: Filter chirps based on user preferences.
 
 ## Requirements
-- Python 3.x
+- Python >= 3.12
 - `django.db.migrations`, `django.db.models`, `django.conf.settings`, `django.contrib.admin`, 
 `django.apps.AppConfig`, `django.forms`, `django.utils.timezone`, `django.contrib.auth.models.User`, 
 `django.test.TestCase`, `django.urls.path`, `chirp_view`, `home`, `profile`, `like_chirp`, 
@@ -53,7 +53,7 @@ To run Chirper locally on your machine, follow these steps:
 
 1. **Sign Up**: 
    - Visit [http://127.0.0.1:8000/] and click on "Sign Up".
-   - Enter your email, username, and password to create an account.
+   - Enter your necessary information to create an account.
    - If you already have an account, click "Log In" and use your credentials.
 
 2. **Create Chirps**: 
