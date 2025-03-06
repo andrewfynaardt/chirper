@@ -8,7 +8,16 @@ Better maintainability, organization, and scalability then just having all URLs 
 """
 
 from django.urls import path
-from .views import chirp_view, home, profile, like_chirp, still_dev
+from .views import (
+    chirp_view,
+    home,
+    profile,
+    like_chirp,
+    still_dev,
+    replies_page,
+    reply_to_chirp,
+    like_reply,
+)
 from django.shortcuts import render
 
 
@@ -21,7 +30,10 @@ urlpatterns = [
         lambda request: render(request, "success.html"),
         name="success",
     ),  # Success page
+    path("chirper/reply/like/<int:reply_id>/", like_reply, name="like_reply"),
     path("null/", still_dev, name="still_dev"),
     path("like/<int:chirp_id>/", like_chirp, name="like_chirp"),
     path("create/", chirp_view, name="chirp_view"),
+    path("chirper/<int:chirp_id>/replies/", replies_page, name="replies_page"),
+    path("chirper/reply/<int:chirp_id>/", reply_to_chirp, name="reply_to_chirp"),
 ]

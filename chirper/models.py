@@ -79,6 +79,12 @@ class Reply(models.Model):
     content = models.TextField(max_length=280)
     created_at = models.DateTimeField(auto_now_add=True)
 
+    likes = models.ManyToManyField(User, related_name="liked_reply_chirps", blank=True)
+
+    # Function that returns the total number of likes
+    def total_reply_likes(self):
+        return self.likes.count()
+
     def __str__(self):
         return f"Reply by {self.user.user_name} to Chirp {self.chirp.id}"
 

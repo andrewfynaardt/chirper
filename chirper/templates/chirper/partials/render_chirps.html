@@ -44,12 +44,15 @@
 
 
         <div class="col text-center">
-            <!--Reply button-->
-            <a href="#" class="btn btn-primary">Write a Reply</a>
+            <!-- Reply button -->
+            <a href="{% url 'replies_page' chirp.id %}" class="btn btn-primary">Write a Reply</a>
         </div>
+
         <div class="col text-end text-body-secondary">
-            <!--Displays the total number of replies for chirp-->
-            {{ chirp.replies.count }} replies
+            <!-- Reply count button leading to the reply page -->
+            <a href="{% url 'replies_page' chirp.id %}" class="btn btn-outline-secondary btn-sm">
+                {{ chirp.replies.count }} Replies
+            </a>
         </div>
     </div>
 </div>

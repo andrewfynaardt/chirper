@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="reply-container">
+    <!-- Parent Chirp -->
+    <div class="chirp-card parent-chirp">
+        <div class="row card-header">
+            <div class="col text-start">
+                <strong>@{{ chirp.user_id.username }}</strong>
+            </div>
+            <div class="col text-end">
+                <small>Created at: {{ chirp.created_time }}</small>
+            </div>
+        </div>
+        <div class="card-body">
+            <p class="card-text">{{ chirp.chirp_body }}</p>
+        </div>
+        <div class="row card-footer align-items-center">
+            <div class="col text-start">
+                <button class="btn like-btn-toggle 
+                {% if request.user in chirp.likes.all %}btn-primary{% else %}btn-outline-primary{% endif %}"
+                    hx-post="{% url 'like_chirp' chirp.id %}" hx-trigger="click" hx-target="#like-count-{{ chirp.id }}"
+                    hx-swap="innerHTML" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' data-chirp-id="{{ chirp.id }}">
+                    {% if request.user in chirp.likes.all %} ❤️ {% else %} ♡ {% endif %}
+                </button>
+                <span id="like-count-{{ chirp.id }}">{{ chirp.total_likes }}</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reply Section -->
+    <div class="reply-section">
+        <!-- Reply Input Form -->
+        <div class="reply-form">
+            <h3>Write a Reply</h3>
+            <form method="POST" action="{% url 'reply_to_chirp' chirp.id %}">
+                {% csrf_token %}
+                <input type="text" name="content" placeholder="Type your reply..." required>
+                <button type="submit" class="btn btn-success">Submit Reply</button>
+            </form>
+        </div>
+
+        <!-- Replies List -->
+        <h3>Replies</h3>
+        {% for reply in chirp.replies.all %}
+        <div class="chirp-card reply-card">
+            <div class="row card-header">
+                <div class="col text-start">
+                    <strong>@{{ reply.user.username }}</strong>
+                </div>
+                <div class="col text-end">
+                    <small>{{ reply.created_at }}</small>
+                </div>
+            </div>
+            <div class="card-body">
+                <p class="card-text">{{ reply.content }}</p>
+            </div>
+
+        </div>
+        {% empty %}
+        <p>No replies yet.</p>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
