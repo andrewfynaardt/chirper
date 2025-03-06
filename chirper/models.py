@@ -12,7 +12,6 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 
 # To use the user ID from the Django default user table
-from django.contrib.auth.models import User
 # Create your models here.
 
 
