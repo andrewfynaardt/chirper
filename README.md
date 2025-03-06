@@ -28,10 +28,17 @@ Chirper is a social media platform where users can sign up, create chirps (messa
 
 To run Chirper locally on your machine, follow these steps:
 
-1. Clone the repository from GitHub.
-2. Install the required dependencies from the `requirements.txt` file.
-3. Start the development server using Django commands.
-4. Open your browser and go to the local server address to access the website.
+To run Chirper locally on your machine, follow these steps:
+
+1. Clone the repository from GitHub:
+   ```bash
+   git clone https://github.com/andrewfynaardt/chirper.git
+   
+2. Navigate into the project directory:
+   ```bash
+   cd chirper
+   
+3. 
 
 ## How to Use the Website
 
