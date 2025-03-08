@@ -224,8 +224,27 @@ Updated: 2025-03-05
 
         <!-- Content Block -->
         <div class="content">
-            <!--Accesses different templates to dynamically insert content-->
-            {% block content %} {% endblock %}
+            <!-- Accesses different templates to dynamically insert content -->
+            {% block content %}
+                <div class="chirp-card">
+                    <h2 class="mb-3">Reply to Chirp</h2>
+        
+                    <!-- Display the original chirp -->
+                    <div class="alert alert-light">
+                        <strong>@{{ parent_chirp.user_id.username }}</strong>: {{ parent_chirp.chirp_body }}
+                    </div>
+        
+                    <!-- Reply Form -->
+                    <form method="POST" class="mt-3">
+                        {% csrf_token %}
+                        <textarea name="content" class="form-control" rows="4" placeholder="Write your reply..."></textarea>
+                        <br>
+                        <button type="submit" class="btn btn-primary">Reply</button>
+                    </form>
+        
+                    <a href="{% url 'home' %}" class="btn btn-link mt-3">Back to home</a>
+                </div>
+            {% endblock %}
         </div>
 
         <!--Javascript Bootstrap 'Bundle'-->
