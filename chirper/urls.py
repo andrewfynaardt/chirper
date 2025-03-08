@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import chirp_view, home, profile, like_chirp, still_dev, reply_to_chirp
+from .views import chirp_view, home, profile, like_chirp, still_dev, like_reply, replies_page, reply_to_chirp
 from django.views.generic import TemplateView
 
 urlpatterns = [
@@ -21,6 +21,10 @@ urlpatterns = [
     # Create a new chirp
     path('create/', chirp_view, name='chirp_view'),  # Using 'chirp_view' to match the original name
 
-    # Reply to a chirp
-    path("chirp/<int:chirp_id>/reply/", reply_to_chirp, name="reply_to_chirp"),
+    path("chirper/reply/like/<int:reply_id>/", like_reply, name="like_reply"),
+
+    path("chirper/<int:chirp_id>/replies/", replies_page, name="replies_page"),
+
+    path("chirper/reply/<int:chirp_id>/", reply_to_chirp, name="reply_to_chirp"),
+
 ]

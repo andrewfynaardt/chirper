@@ -80,23 +80,31 @@ class Chirps(models.Model):
         return filtered_chirps
     
 
+# Create your models here.
 class Reply(models.Model):
     """
     Represents a reply to a chirp.
-    
+
     Attributes:
         user (User): The user who made the reply.
         chirp (Chirps): The chirp being replied to.
         content (str): The reply content.
-        created_time (datetime): The timestamp of when the reply was made.
+        created_at (datetime): The timestamp of when the reply was made.
     """
+
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     chirp = models.ForeignKey(Chirps, related_name="replies", on_delete=models.CASCADE)
     content = models.TextField(max_length=280)
-    created_time = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    likes = models.ManyToManyField(User, related_name="liked_reply_chirps", blank=True)
+
+    # Function that returns the total number of likes
+    def total_reply_likes(self):
+        return self.likes.count()
 
     def __str__(self):
-        return f"Reply by {self.user.username} to Chirp {self.chirp.id}"
+        return f"Reply by {self.user.user_name} to Chirp {self.chirp.id}"
 
 
 class UserFollowing(models.Model):
