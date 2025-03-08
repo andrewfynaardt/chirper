@@ -40,17 +40,21 @@ To run Chirper locally on your machine, follow these steps:
 2. Navigate into the project directory:
    ```bash
    cd chirper
-   
-3. Run the migrations to set up the database:
-   ```bash
-   python manage.py migrate
 
-4. Start the development server using Django:
+3. Sync dependencies:
+   ```bash
+   uv sync
+   
+4. Run the migrations to set up the database:
+   ```bash
+   uv run python manage.py migrate
+
+5. Start the development server using Django:
    ```bash
    uv run python manage.py runserver
 
-5. Open your browser and go to the local server address to access the website:
-   http://127.0.0.1:8000/
+6. Open your browser and go to the local server address to access the website:
+   http://127.0.0.1:8000/chirper/home/
    
 ## How to Use the Website
 
