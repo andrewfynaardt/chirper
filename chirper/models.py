@@ -23,6 +23,15 @@ class Chirps(models.Model):
     created_time = models.DateTimeField(default=timezone.now)
     likes = models.ManyToManyField(User, related_name="liked_chirps", blank=True)
 
+    # Field for replies
+    parent_chirp = models.ForeignKey(
+        'self',  # Self-referential ForeignKey
+        on_delete=models.CASCADE, 
+        null=True, 
+        blank=True, 
+        related_name="replies"
+    )
+
     # Method that returns the total number of likes
     def total_likes(self):
         return self.likes.count()
