@@ -156,6 +156,30 @@ Updated: 2025-03-05
             background-color: #0056b3;
         }
 
+        /* Create Filter Dropdown */
+        .filter-dropdown-btn {
+            position: fixed;
+            bottom: 100px;
+            left: 90%;
+            transform: translateX(-50%);
+            width: 250px;
+            padding: 15px;
+            font-size: 18px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            text-align: center;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        /*Change background color when hovering*/
+        .filter-dropdown-btn:hover {
+            background-color: #0056b3;
+        }
+
         /* Like Button Styles */
         .like-btn {
             border: 1px solid #007bff;
@@ -206,6 +230,39 @@ Updated: 2025-03-05
 
         <!--Javascript Bootstrap 'Bundle'-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+        <!-- Sorting Dropdown Menu -->
+        <form id="dropdownForm" method="POST">
+            {% csrf_token %}
+            <div class="dropdown">
+                <button class="btn btn-primary filter-dropdown-btn" type="button" id="dropdownMenuButton"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    Date Created
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <li><a class="dropdown-item" href="#" data-value="date">Date Created</a></li>
+                    <li><a class="dropdown-item" href="#" data-value="likes">Most Likes</a></li>
+                    <li><a class="dropdown-item" href="#" data-value="recent_reply">Latest Reply</a></li>
+                    <li><a class="dropdown-item" href="#" data-value="total_replies">Most Replies</a></li>
+                </ul>
+                <input type="hidden" name="selected_option" id="selectedOption">
+            </div>
+            <button type="submit" class="btn btn-success mt-2">Submit</button>
+        </form>
+
+        <script>
+            document.querySelectorAll('.dropdown-item').forEach(item => {
+                item.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    let sort_type = this.getAttribute('data-value');
+                    document.getElementById('dropdownMenuButton').innerText = this.innerText;
+                    document.getElementById('selectedOption').value = sort_type;
+                    // Set the cookie
+                    document.cookie = "sort_type=" + selectedValue + "; path=/; max-age=86400"; // 86400 seconds = 1 day
+                });
+            });
+        </script>
+
         <!-- Create New Chirp Button -->
         <button class="create-chirp-btn" data-bs-toggle="modal" data-bs-target="#chirpModal">
             Create New Chirp</button>

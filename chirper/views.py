@@ -15,7 +15,9 @@ def still_dev(request):
 
 # Home view
 def home(request):
-    chirps = Chirps.objects.all().order_by("-created_time")  # Fetch chirps
+    # Filter chirps based on user selection
+    sort_type = request.COOKIES.get("sort_type", "date")
+    chirps = Chirps.get_filtered_chirps(request, "all", sort_type)
     form = ChirpForm()
     return render(request, "home.html", {"chirps": chirps, "form": form})
 
