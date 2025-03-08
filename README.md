@@ -13,7 +13,8 @@ Chirper is a social media platform where users can sign up, create chirps, like 
 ### Extended Features:
 - **Custom Styling**: The application includes custom CSS, scripts, and Google Fonts to enhance the user interface and provide a visually appealing experience.  
 - **HTMX Integration**: Utilizes HTMX for dynamic content updates, allowing interactions without full-page reloads.  
-- **AJAX-Based Liking**: Users can like chirps instantly without needing to refresh the page, improving responsiveness and user experience.  
+- **AJAX-Based Liking**: Users can like chirps instantly without needing to refresh the page, improving responsiveness and user experience.
+- **Chirp Filtering**: Users can chose the order to view the chirps.
 
 
 ## Requirements
