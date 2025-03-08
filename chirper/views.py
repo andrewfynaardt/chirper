@@ -55,7 +55,7 @@ def reply_to_chirp(request, chirp_id):
         content = request.POST.get("content")
         if content:
             Reply.objects.create(user=request.user, chirp=chirp, content=content)
-    return redirect("chirp_detail", chirp_id=chirp.id)  # Ensure 'chirp_detail' exists in urls.py
+    return redirect("home")  # Or "profile" or any valid page
 
 # # Follow a user
 # @login_required
