@@ -54,15 +54,15 @@ class Chirps(models.Model):
                 filtered_chirps = cls.objects.all()
         
         match sort_type:
-            case "most_liked":
+            case "most_likes":
                 filtered_chirps = filtered_chirps.annotate(likes_count=Count('likes'))
                 filtered_chirps = filtered_chirps.order_by('-likes_count')
-            case "most_replies":
-                filtered_chirps = filtered_chirps.order_by(replies_count=Count('replies'))
-                filtered_chirps = filtered_chirps.order_by('-replies_count')
-            case "latest_reply":
-                filtered_chirps = filtered_chirps.order_by(Chirps.most_recent_reply())
-                filtered_chirps = filtered_chirps.order_by('-likes_count')
+            # TODO: Implement sorting by most replies and latest reply when replies are working
+            # case "most_replies":
+            #     filtered_chirps = filtered_chirps.annotate(replies_count=Count('replies'))
+            #     filtered_chirps = filtered_chirps.order_by('-replies_count')
+            # case "latest_reply":
+            #     filtered_chirps = filtered_chirps.order_by(cls.replies.order_by('-created_time')[0])
             case "date":
                 filtered_chirps = filtered_chirps.order_by("-created_time")
             case default:

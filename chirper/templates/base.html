@@ -237,13 +237,14 @@ Updated: 2025-03-05
             <div class="dropdown">
                 <button class="btn btn-primary filter-dropdown-btn" type="button" id="dropdownMenuButton"
                     data-bs-toggle="dropdown" aria-expanded="false">
-                    Date Created
+                    <!-- This button will be updated with the javascript to be the selected sort option -->
+                    Dropdown Option
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <li><a class="dropdown-item" href="#" data-value="date">Date Created</a></li>
-                    <li><a class="dropdown-item" href="#" data-value="likes">Most Likes</a></li>
-                    <li><a class="dropdown-item" href="#" data-value="recent_reply">Latest Reply</a></li>
-                    <li><a class="dropdown-item" href="#" data-value="total_replies">Most Replies</a></li>
+                    <li><a class="dropdown-item" href="#" data-value="most_likes">Most Likes</a></li>
+                    <li><a class="dropdown-item" href="#" data-value="latest_reply">Latest Reply</a></li>
+                    <li><a class="dropdown-item" href="#" data-value="most_replies">Most Replies</a></li>
                 </ul>
                 <input type="hidden" name="selected_option" id="selectedOption">
             </div>
@@ -251,14 +252,56 @@ Updated: 2025-03-05
         </form>
 
         <script>
+            // Function to retrieve a cookie value by its name
+            function getCookie(name) {
+                let cookieArr = document.cookie.split(";");
+                for (let i = 0; i < cookieArr.length; i++) {
+                    let cookie = cookieArr[i].trim();
+                    if (cookie.startsWith(name + "=")) {
+                        return cookie.substring(name.length + 1);
+                    }
+                }
+                return null;
+            }
+
+            // Get the 'sort_type' cookie value if it exists
+            let sortType = getCookie("sort_type");
+
+            // Set default value if cookie doesn't exist
+            if (!sortType) {
+                sortType = "date";  // Default value
+            }
+
+            // Update the button text to reflect the current 'sort_type' or default
+            document.getElementById("dropdownMenuButton").innerText = getButtonText(sortType);
+
+            // Function to get button text based on selected sort type
+            function getButtonText(sortType) {
+                switch (sortType) {
+                    case "most_likes":
+                        return "Most Likes";
+                    case "latest_reply":
+                        return "Latest Reply";
+                    case "most_replies":
+                        return "Most Replies";
+                    default:
+                        return "Date Created";
+                }
+            }
+
+            // Dropdown item selection behavior
             document.querySelectorAll('.dropdown-item').forEach(item => {
                 item.addEventListener('click', function (event) {
                     event.preventDefault();
                     let sort_type = this.getAttribute('data-value');
                     document.getElementById('dropdownMenuButton').innerText = this.innerText;
                     document.getElementById('selectedOption').value = sort_type;
-                    // Set the cookie
-                    document.cookie = "sort_type=" + selectedValue + "; path=/; max-age=86400"; // 86400 seconds = 1 day
+
+                    // Set the cookie with the selected value
+                    document.cookie = "sort_type=" + sort_type + "; path=/; max-age=86400"; // 86400 seconds = 1 day
+
+                    // Submit the form to refresh the page or use AJAX if needed
+                    document.getElementById('dropdownForm').submit();
                 });
             });
         </script>
