@@ -16,7 +16,6 @@ def still_dev(request):
 # Home view
 def home(request):
     # Filter chirps based on user selection
-    print(request.COOKIES)
     sort_type = request.COOKIES.get("sort_type", "date")
     chirps = Chirps.get_filtered_chirps(request, "all", sort_type)
     form = ChirpForm()
