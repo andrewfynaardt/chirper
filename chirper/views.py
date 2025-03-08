@@ -44,18 +44,28 @@ def chirp_view(request):
 
     return render(request, "chirper/chirp_form.html", {"form": form})
 
-# Reply to a chirp
+# Reply to chirp
 @login_required
 def reply_to_chirp(request, chirp_id):
     """
     Allows users to reply to a chirp.
     """
-    chirp = get_object_or_404(Chirps, id=chirp_id)
+    parent_chirp = get_object_or_404(Chirps, id=chirp_id)
+
     if request.method == "POST":
         content = request.POST.get("content")
         if content:
-            Reply.objects.create(user=request.user, chirp=chirp, content=content)
-    return redirect("home")  # Or "profile" or any valid page
+            # Create a new chirp as a reply
+            Chirps.objects.create(
+                chirp_body=content,
+                user_id=request.user,
+                created_time=timezone.now(),
+                parent_chirp=parent_chirp  # Link the reply to the parent chirp
+            )
+            return redirect("home")  # Redirect after replying
+    
+    return render(request, "reply_form.html", {"parent_chirp": parent_chirp})
+
 
 # # Follow a user
 # @login_required
