@@ -61,10 +61,10 @@ def reply_to_chirp(request, chirp_id):
     if request.method == "POST":
         content = request.POST.get("content")
         if content:
-            Reply.objects.create(user=request.user, chirp=chirp, content=content)
-    return redirect(
-        "replies_page", chirp_id=chirp.id
-    )  
+            Reply.objects.create(user=request.user, chirp=parent_chirp, content=content)  # Fix here
+
+    return redirect("replies_page", chirp_id=parent_chirp.id)  # Fix redirect variable
+
 
 # # Follow a user
 # @login_required

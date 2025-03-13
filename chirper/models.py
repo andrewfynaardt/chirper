@@ -29,7 +29,7 @@ class Chirps(models.Model):
         on_delete=models.CASCADE, 
         null=True, 
         blank=True, 
-        related_name="replies"
+        related_name="child_replies"
     )
 
     # Method that returns the total number of likes
@@ -104,7 +104,7 @@ class Reply(models.Model):
         return self.likes.count()
 
     def __str__(self):
-        return f"Reply by {self.user.user_name} to Chirp {self.chirp.id}"
+        return f"Reply by {self.user.username} to Chirp {self.chirp.id}"
 
 
 class UserFollowing(models.Model):
