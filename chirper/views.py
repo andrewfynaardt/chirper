@@ -7,15 +7,23 @@ from .models import Chirps, Reply, UserFollowing, User
 
 # Profile view
 def profile(request):
+    """
+    Render the user's profile page.
+    """
     return render(request, "profile.html")
 
 # place holder to let user know page is still in development
 def still_dev(request):
+    """
+    Render a placeholder page for features still in development.
+    """
     return render(request, "still_dev.html")
 
 # Home view
 def home(request):
-    # Filter chirps based on user selection
+    """
+    Render the home page with a list of chirps, filter chirps based on user selection.
+    """
     print(request.COOKIES)
     sort_type = request.COOKIES.get("sort_type", "date")
     chirps = Chirps.get_filtered_chirps(request, "all", sort_type)
@@ -46,7 +54,7 @@ def chirp_view(request):
 
 def replies_page(request, chirp_id):
     """
-    Replies page for chirps
+    Replies page for chirps.
     """
     chirp = get_object_or_404(Chirps, id=chirp_id)
     return render(request, "replies.html", {"chirp": chirp})
@@ -61,9 +69,9 @@ def reply_to_chirp(request, chirp_id):
     if request.method == "POST":
         content = request.POST.get("content")
         if content:
-            Reply.objects.create(user=request.user, chirp=parent_chirp, content=content)  # Fix here
+            Reply.objects.create(user=request.user, chirp=parent_chirp, content=content)
 
-    return redirect("replies_page", chirp_id=parent_chirp.id)  # Fix redirect variable
+    return redirect("replies_page", chirp_id=parent_chirp.id)
 
 
 # # Follow a user
