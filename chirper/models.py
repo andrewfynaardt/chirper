@@ -38,10 +38,16 @@ class Chirps(models.Model):
     
     # Function that returns the total number of replies
     def total_replies(self):
+        """
+        Returns the total number of replies to this chirp.
+        """
         return self.replies.count()
     
     # Function that returns the most recent reply
     def most_recent_reply(self):
+        """
+        Returns the timestamp of the most recent reply or the chirp's creation time if no replies exist.
+        """
         if self.replies.count() > 0:
             return self.replies.latest('created_time').created_time
         return self.created_time
@@ -101,6 +107,9 @@ class Reply(models.Model):
 
     # Function that returns the total number of likes
     def total_reply_likes(self):
+        """
+        Returns the total number of likes for this reply.
+        """
         return self.likes.count()
 
     def __str__(self):
