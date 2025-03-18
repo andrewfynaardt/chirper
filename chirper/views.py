@@ -3,7 +3,7 @@ from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest, JsonResponse
 from .forms import ChirpForm
-from .models import Chirps, Reply, UserFollowing, User
+from .models import Chirps, Reply, User
 
 # Profile view
 def profile(request):
@@ -72,29 +72,7 @@ def reply_to_chirp(request, chirp_id):
             Reply.objects.create(user=request.user, chirp=parent_chirp, content=content)
 
     return redirect("replies_page", chirp_id=parent_chirp.id)
-
-
-# # Follow a user
-# @login_required
-# def follow_user(request, user_id):
-#     """
-#     Allows users to follow another user.
-#     """
-#     user_to_follow = get_object_or_404(User, id=user_id)
-#     if request.user != user_to_follow:
-#         UserFollowing.objects.get_or_create(user=request.user, following_user=user_to_follow)
-#     return redirect("profile_view", username=user_to_follow.username)  # Ensure 'profile_view' exists
-
-# # Unfollow a user
-# @login_required
-# def unfollow_user(request, user_id):
-#     """
-#     Allows users to unfollow another user.
-#     """
-#     user_to_unfollow = get_object_or_404(User, id=user_id)
-#     UserFollowing.objects.filter(user=request.user, following_user=user_to_unfollow).delete()
-#     return redirect("profile_view", username=user_to_unfollow.username)  # Ensure 'profile_view' exists
-
+    
 # Display user profile
 def profile_view(request, username):
     """
@@ -102,14 +80,6 @@ def profile_view(request, username):
     """
     profile_user = get_object_or_404(User, username=username)
     chirps = Chirps.objects.filter(user=profile_user).order_by("-created_time")  # Use 'created_time'
-    
-    # followers_count = UserFollowing.objects.filter(following_user=profile_user).count()
-    # following_count = UserFollowing.objects.filter(user=profile_user).count()
-
-    # is_following = (
-    #     request.user.is_authenticated
-    #     and UserFollowing.objects.filter(user=request.user, following_user=profile_user).exists()
-    # )
 
     return render(
         request,
@@ -117,9 +87,6 @@ def profile_view(request, username):
         {
             "profile_user": profile_user,
             "chirps": chirps,
-            # "followers_count": followers_count,
-            # "following_count": following_count,
-            # "is_following": is_following,
         }
     )
 
