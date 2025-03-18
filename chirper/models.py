@@ -114,23 +114,3 @@ class Reply(models.Model):
 
     def __str__(self):
         return f"Reply by {self.user.username} to Chirp {self.chirp.id}"
-
-
-class UserFollowing(models.Model):
-    """
-    Represents a user following another user.
-    
-    Attributes:
-        user (User): The user who is following.
-        following_user (User): The user being followed.
-        created_time (datetime): The timestamp when the follow occurred.
-    """
-    user = models.ForeignKey(User, related_name="following", on_delete=models.CASCADE)
-    following_user = models.ForeignKey(User, related_name="followers", on_delete=models.CASCADE)
-    created_time = models.DateTimeField(auto_now_add=True)
-
-    class Meta:
-        unique_together = ('user', 'following_user')  # Prevent duplicate follows
-
-    def __str__(self):
-        return f"{self.user.username} follows {self.following_user.username}"
