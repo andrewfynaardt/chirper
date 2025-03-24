@@ -9,12 +9,12 @@ class Chirps(models.Model):
     
     Attributes:
         chirp_body (str): Content of the chirp.
-        user_id (int): (foreign key) The user that created this chirp.
+        user (User -int): (foreign key) The user that created this chirp.
         created_time (datetime): The date and time when the chirp was created.
-        parent_chirp_id (int): (foreign key) The Chirp ID of the parent Chirp (if this Chirp is a reply).
+        parent_chirp (Chirps -int): (foreign key) The Chirp ID of the parent Chirp (if this Chirp is a reply).
     """
     chirp_body = models.CharField(max_length=255)
-    user_id = models.ForeignKey(
+    user = models.ForeignKey(
         User,
         on_delete=models.SET_NULL,
         null=True,

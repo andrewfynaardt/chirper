@@ -1,0 +1,209 @@
+/* 
+chirper/static/chirper/css/styles.css
+Created: 2025/03/23
+Updated: 2025/03/23
+
+Contains the styles for base.html
+*/
+
+/*Removes default spacing, Montserrat used as font, background color gradient*/
+body {
+    margin: 0;
+    font-family: 'Montserrat', Arial, sans-serif;
+    background: linear-gradient(155deg, #9ecfff, #ffffff);
+    color: #2C3E50;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+/* Top Panel */
+/*panel at the top of the page, centers content with even spacing, ensures it stays above other content, provides spacing */
+.top-panel {
+    background-color: #2C3E50;
+    color: #ffffff;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    z-index: 1000;
+}
+
+/*Adds reference to h1: first header*/
+.top-panel h1 {
+    font-size: 2em;
+    margin: 0;
+}
+
+/*Profile button in top right corener*/
+.profile button {
+    background-color: #f39c12;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+/* Left Sidebar. Contains: Home, Explore, Notificatins, Messages, Bookmarks, Settings&Privacy, etc. */
+.container {
+    /*Formats elemnts with even spacing*/
+    display: flex
+}
+
+/*Left Sidebar navigation*/
+.sidebar {
+    background-color: #34495E;
+    width: 250px;
+    padding-top: 60px;
+    /*adds spacing*/
+    min-width: 200px;
+    color: #ffffff;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+
+    overflow-y: auto;
+
+}
+
+.sidebar a {
+    color: #ecf0f1;
+    text-decoration: none;
+    margin-bottom: 10px;
+    display: block;
+    padding: 8px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+/*Adds background color when hovering over option*/
+.sidebar a:hover {
+    background-color: #3d566e;
+}
+
+/* Area of the screen that contains chirps*/
+.content {
+    display: flex;
+    flex-direction: column;
+    /*Centers Chirps*/
+
+    margin-left: 270px;
+    /* Avoids overlap with top panel*/
+    padding: 80px 20px 20px;
+    width: calc(100% - 270px);
+}
+
+/* Chirp Card/Box */
+.chirp-card {
+    background: white;
+    border-radius: 8px;
+    top: 0;
+    margin-left: -130px;
+    padding: 20px;
+    margin-bottom: 10px;
+    /*Creates shadow under the chirp box*/
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    /*Controls size of the chirp box*/
+    width: 100%;
+    max-width: 700px;
+    display: flex;
+    /* Stacks the chirps on top of each other*/
+    flex-direction: column;
+}
+
+/* Create Chirp Button */
+.create-chirp-btn {
+    position: fixed;
+    bottom: 20px;
+    left: 90%;
+    transform: translateX(-50%);
+    width: 250px;
+    padding: 15px;
+    font-size: 18px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+/*Affects background color when hovering over it*/
+.create-chirp-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Create Filter Dropdown */
+.filter-dropdown-btn {
+    position: fixed;
+    bottom: 100px;
+    left: 90%;
+    transform: translateX(-50%);
+    width: 250px;
+    padding: 15px;
+    font-size: 18px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+/*Change background color when hovering*/
+.filter-dropdown-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Like Button Styles */
+.like-btn {
+    border: 1px solid #007bff;
+    color: #007bff;
+    background-color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Ensures the Parent Chirp and Replies are Stacked Correctly */
+.reply-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+}
+
+/* Styles the Parent Chirp */
+.parent-chirp {
+    width: 100%;
+    max-width: 700px;
+}
+
+/* Styles the Reply Section */
+.reply-section {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 700px;
+}
+
+/* Styles Each Individual Reply */
+.reply-card {
+    width: 100%;
+    max-width: 700px;
+    margin-left: 30px;
+    /* Indents replies slightly */
+}
