@@ -3,7 +3,7 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from django.db.models import Count
 
-class Chirps(models.Model):
+class Chirp(models.Model):
     """
     Information related to each chirp is stored here.
     
@@ -60,9 +60,9 @@ class Chirps(models.Model):
         """Returns a queryset of chirps based on the filter and sort parameters."""
         match filter_type:
             case "following":
-                filtered_chirps = cls.objects.filter(user_id__in=request.user.following.all())
+                filtered_chirps = cls.objects.filter(user__in=request.user.following.all())
             case "own":
-                filtered_chirps = cls.objects.filter(user_id=request.user)
+                filtered_chirps = cls.objects.filter(user=request.user)
             case "all":
                 filtered_chirps = cls.objects.all()
             case default:
@@ -99,7 +99,7 @@ class Reply(models.Model):
     """
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    chirp = models.ForeignKey(Chirps, related_name="replies", on_delete=models.CASCADE)
+    chirp = models.ForeignKey(Chirp, related_name="replies", on_delete=models.CASCADE)
     content = models.TextField(max_length=280)
     created_at = models.DateTimeField(auto_now_add=True)
 

@@ -23,7 +23,7 @@ class Migration(migrations.Migration):
                 ('created_time', models.DateTimeField(default=django.utils.timezone.now)),
                 ('likes', models.ManyToManyField(blank=True, related_name='liked_chirps', to=settings.AUTH_USER_MODEL)),
                 ('parent_chirp', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='replies', to='chirper.chirps')),
-                ('user_id', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='chirps', to=settings.AUTH_USER_MODEL)),
+                ('user', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='chirps', to=settings.AUTH_USER_MODEL)),
             ],
         ),
         migrations.CreateModel(

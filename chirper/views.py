@@ -3,7 +3,7 @@ from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest, JsonResponse
 from .forms import ChirpForm
-from .models import Chirps, Reply, User
+from .models import Chirp, Reply, User
 
 # Profile view
 def profile(request):
@@ -26,7 +26,7 @@ def home(request):
     """
     print(request.COOKIES)
     sort_type = request.COOKIES.get("sort_type", "date")
-    chirps = Chirps.get_filtered_chirps(request, "all", sort_type)
+    chirps = Chirp.get_filtered_chirps(request, "all", sort_type)
     form = ChirpForm()
     return render(request, "home.html", {"chirps": chirps, "form": form})
 
@@ -41,7 +41,7 @@ def chirp_view(request):
 
         if form.is_valid():
             chirp = form.save(commit=False)
-            chirp.user_id = request.user  # Ensure chirp is linked to user
+            chirp.user = request.user  # Ensure chirp is linked to user
             chirp.created_time = timezone.now()
             chirp.parent_chirp_id = None  # Update if replying to a chirp
             chirp.save()
@@ -56,7 +56,7 @@ def replies_page(request, chirp_id):
     """
     Replies page for chirps.
     """
-    chirp = get_object_or_404(Chirps, id=chirp_id)
+    chirp = get_object_or_404(Chirp, id=chirp_id)
     return render(request, "replies.html", {"chirp": chirp})
 
 @login_required
@@ -64,7 +64,7 @@ def reply_to_chirp(request, chirp_id):
     """
     Allows users to reply to a chirp.
     """
-    parent_chirp = get_object_or_404(Chirps, id=chirp_id)
+    parent_chirp = get_object_or_404(Chirp, id=chirp_id)
 
     if request.method == "POST":
         content = request.POST.get("content")
@@ -79,7 +79,7 @@ def profile_view(request, username):
     Displays the profile page of a user, showing their chirps and follow stats.
     """
     profile_user = get_object_or_404(User, username=username)
-    chirps = Chirps.objects.filter(user=profile_user).order_by("-created_time")  # Use 'created_time'
+    chirps = Chirp.objects.filter(user=profile_user).order_by("-created_time")  # Use 'created_time'
 
     return render(
         request,
@@ -94,7 +94,7 @@ def profile_view(request, username):
 @login_required
 def like_chirp(request, chirp_id):
     """Lke/Unlike Chirps"""
-    chirp = get_object_or_404(Chirps, id=chirp_id)
+    chirp = get_object_or_404(Chirp, id=chirp_id)
 
     if request.user in chirp.likes.all():
         chirp.likes.remove(request.user)  # Unlike

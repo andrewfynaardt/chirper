@@ -7,7 +7,7 @@ Contains the form to accept user chirp input.
 """
 
 from django import forms
-from .models import Chirps
+from .models import Chirp
 
 
 class ChirpForm(forms.ModelForm):
@@ -16,5 +16,5 @@ class ChirpForm(forms.ModelForm):
     Only allow the user to inout chirp_body.
     """
     class Meta:
-        model = Chirps
+        model = Chirp
         fields = ['chirp_body']
