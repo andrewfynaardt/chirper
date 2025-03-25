@@ -1,5 +1,8 @@
 <!--
-Updated: 2025-03-05
+templates/chirper/base.html
+Updated: 2025-03-24
+
+Contains the basic layout of the chirper app.
 -->
 
 <!--Looks for "static" folder in chirper directory to use in template-->
@@ -81,60 +84,7 @@ Updated: 2025-03-05
 
 
 
-        <!-- Sorting Dropdown Menu -->
-        <form id="dropdownForm" method="POST">
-            {% csrf_token %}
-            <div class="dropdown">
-                <button class="btn btn-primary filter-dropdown-btn" type="button" id="dropdownMenuButton"
-                    data-bs-toggle="dropdown" aria-expanded="false">
-                    <!-- This button will be updated with the javascript to be the selected sort option -->
-                    Dropdown Option
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <li><a class="dropdown-item" href="#" data-value="date">Date Created</a></li>
-                    <li><a class="dropdown-item" href="#" data-value="most_likes">Most Likes</a></li>
-                    <li><a class="dropdown-item" href="#" data-value="latest_reply">Latest Reply</a></li>
-                    <li><a class="dropdown-item" href="#" data-value="most_replies">Most Replies</a></li>
-                </ul>
-                <input type="hidden" name="selected_option" id="selectedOption">
-            </div>
-            <button type="submit" class="btn btn-success mt-2">Submit</button>
-        </form>
 
-
-        <!-- Create New Chirp Button -->
-        <button class="create-chirp-btn" data-bs-toggle="modal" data-bs-target="#chirpModal">
-            Create New Chirp</button>
-
-        <!--Pop Up(Modal) for Creating a New Chirp-->
-        <div class="modal fade" id="chirpModal" tabindex="-1" aria-labelledby="chirpModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <!--Pop up header-->
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="chirpModalLabel">Create a New Chirp</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-
-                    <!-- Modal Body (Includes chirp_form template) -->
-                    <div class="modal-body">
-                        <form method="POST" action="{% url 'chirp_view' %}">
-                            {% csrf_token %}
-
-                            <!-- Render Chirp Form Dynamically -->
-                            {% if form %}
-                            {{ form.as_p }}
-                            <!-- Submit Button -->
-                            <button type="submit" class="btn btn-primary">Post Chirp</button>
-                            {% else %}
-                            <a href="{% url 'account_login' %}" class="btn btn-warning">Login</a> to post a chirp.
-                            {% endif %}
-
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
 
 
         <!--Javascript Bootstrap 'Bundle'-->
